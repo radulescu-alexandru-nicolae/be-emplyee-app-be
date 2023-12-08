@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -28,16 +27,14 @@ public class IdentityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createIdentity(@RequestParam("email") String email,
-                                            @RequestParam("image") MultipartFile image) {
+    public ResponseEntity<String> createIdentity(@RequestParam("email") String email,
+                                         @RequestParam("image") MultipartFile image) {
         try {
+            // Assuming identityDAO is an instance of your DAO class
             identityDAO.createIdentity(email, image.getBytes());
             return ResponseEntity.ok().body("Identity created successfully");
         } catch (IOException e) {
             return ResponseEntity.badRequest().body("Unable to process image");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("An error occurred while creating the identity");
         }
     }
 
@@ -45,7 +42,7 @@ public class IdentityController {
     public ResponseEntity<ResponseStatus> compareWithAll(@RequestParam("image") MultipartFile image) {
         try {
             byte[] imageBytes = image.getBytes();
-            HashMap<AccountDto, byte[]> allIdentities = identityDAO.getAllIdentities();
+            Map<AccountDto, byte[]> allIdentities = identityDAO.getAllIdentities();
             for (Map.Entry<AccountDto, byte[]> entry : allIdentities.entrySet()) {
                 String compareResult = faceComparisonService.compareFaces(imageBytes, entry.getValue());
                 ObjectMapper mapper = new ObjectMapper();
@@ -65,7 +62,6 @@ public class IdentityController {
 
         } catch (IOException e) {
 
-            e.printStackTrace();
             return ResponseEntity.badRequest().body(ResponseStatus.builder().message("An error ocured...").build());
         }
     }

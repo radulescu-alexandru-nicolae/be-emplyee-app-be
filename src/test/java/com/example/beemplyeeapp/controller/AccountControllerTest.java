@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AccountControllerTest {
+ class AccountControllerTest {
 
     @InjectMocks
     private AccountController accountController;
@@ -29,7 +29,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testAddAccountHappyPath() {
+     void testAddAccountHappyPath() {
         Account account = new Account();
         Mockito.when(accountDao.createAccount(account)).thenReturn(true);
 
@@ -40,7 +40,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testAddAccountUnhappyPath() {
+     void testAddAccountUnhappyPath() {
         Account account = new Account();
         Mockito.when(accountDao.createAccount(account)).thenReturn(false);
 
@@ -51,7 +51,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testLoginHappyPath() {
+     void testLoginHappyPath() {
         String email = "test@example.com";
         String password = "password";
 
@@ -64,7 +64,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testLoginUnhappyPath() {
+     void testLoginUnhappyPath() {
         String email = "test@example.com";
         String password = "password";
 
@@ -77,7 +77,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testRemoveAccountHappyPath() {
+     void testRemoveAccountHappyPath() {
         int accountId = 1;
         Mockito.doNothing().when(accountDao).removeAccount(accountId);
 
@@ -88,7 +88,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testRemoveAccountUnhappyPath() {
+     void testRemoveAccountUnhappyPath() {
         int accountId = 1;
         Mockito.doThrow(EntityNotFoundException.class).when(accountDao).removeAccount(accountId);
 
@@ -99,7 +99,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testUpdateAccountHappyPath() {
+     void testUpdateAccountHappyPath() {
         int accountId = 1;
         Account account = new Account();
 
@@ -112,7 +112,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    public void testUpdateAccountUnhappyPath() {
+     void testUpdateAccountUnhappyPath() {
         int accountId = 1;
         Account account = new Account();
 

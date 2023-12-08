@@ -2,6 +2,9 @@ package com.example.beemplyeeapp.utils;
 
 public class CNPValidator {
 
+    private CNPValidator() {
+    }
+
     public static boolean isValidCNP(String cnp) {
         if (cnp.length() != 13) {
             return false;
@@ -26,10 +29,7 @@ public class CNPValidator {
         if (checksum == 10) {
             checksum = 1;
         }
-        if (checksum != controlDigit) {
-            return false;
-        }
-        return true;
+        return checksum == controlDigit;
     }
 
 

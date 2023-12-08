@@ -1,15 +1,11 @@
 package com.example.beemplyeeapp.model;
 import com.example.beemplyeeapp.utils.PasswordEncryption;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
-import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -30,7 +26,6 @@ public class Account {
     private String password;
 
     @Column(name = "CNP")
-    @NotNull
     private String cnp;
 
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

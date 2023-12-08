@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Repository
@@ -36,7 +37,7 @@ private AccoutnDAO accoutnDAO;
 throw new RuntimeException();        }
     }
 
-    public HashMap<AccountDto, byte[]> getAllIdentities() {
+    public Map<AccountDto, byte[]> getAllIdentities() {
         List<Identity> identities = entityManager.createQuery("SELECT i FROM identities i", Identity.class).getResultList();
 
         HashMap<AccountDto, byte[]> identitiesMap = new HashMap<>();

@@ -37,11 +37,10 @@ public class FaceComparisonService {
             if (response.getStatusCode() == HttpStatus.OK) {
                 return response.getBody();
             } else {
-                throw new RuntimeException("Failed: HTTP error code : " + response.getStatusCode());
+                return null;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // This will print the stack trace if an exception occurs
-            throw new RuntimeException("Failed: An exception occurred", e);
+            return null;
         }
     }
 }

@@ -71,7 +71,7 @@ public class AccoutnDAO implements IAccoutnDao {
             String accountDecryptedPassword = account.getPasswordDecrypted();
             oldAccount.setPassword(accountDecryptedPassword);
         } else {
-            throw new EntityNotFoundException("Account not found with  ID: " + id);
+            throw new EntityNotFoundException("Account not found with ID:" + id);
         }
     }
 
