@@ -6,10 +6,10 @@ import com.example.beemplyeeapp.model.Identity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,20 +21,21 @@ public class IdentityDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-@Autowired
-private AccoutnDAO accoutnDAO;
+    @Autowired
+    private AccoutnDAO accoutnDAO;
 
     public void createIdentity(String email, byte[] image) {
-        Account account = accoutnDAO.findByEmail(email); // Find an Account with the same email.
+        Account account = accoutnDAO.findByEmail(email);
 
         if (account != null) {
-            Identity identity = new Identity(email, image,account);
+            Identity identity = new Identity(email, image, account);
 
-            account.setIdentity(identity); // Associate the identity with the account.
+            account.setIdentity(identity);
 
-            entityManager.persist(identity); // Save the identity, which is now associated with the account.
+            entityManager.persist(identity);
         } else {
-throw new RuntimeException();        }
+            throw new RuntimeException();
+        }
     }
 
     public Map<AccountDto, byte[]> getAllIdentities() {

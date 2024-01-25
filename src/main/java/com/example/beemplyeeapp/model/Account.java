@@ -1,6 +1,7 @@
 package com.example.beemplyeeapp.model;
 import com.example.beemplyeeapp.utils.PasswordEncryption;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class Account {
     @Column(name="email")
     private String email;
 
-    @Column(name="password")
+    @JsonProperty("password")
     private String password;
 
     @Column(name = "CNP")

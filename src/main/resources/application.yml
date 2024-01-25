@@ -11,7 +11,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
-          ddl-auto: update
+          ddl-auto: create
 loggers:
   - logger:
       name: org.hibernate

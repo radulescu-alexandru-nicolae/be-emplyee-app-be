@@ -3,6 +3,8 @@ package com.example.beemplyeeapp.controller;
 import com.example.beemplyeeapp.dao.IAccoutnDao;
 import com.example.beemplyeeapp.model.Account;
 import com.example.beemplyeeapp.model.ResponseStatus;
+import com.example.beemplyeeapp.utils.PasswordEncryption;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +22,14 @@ public class AccountController {
     private final IAccoutnDao iAccoutnDao;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<ResponseStatus> addAccount(@RequestBody Account account) {
-
+        System.out.println("Account from requestBody" +account);
+        System.out.println("password "+account.getPassword());
         if (!iAccoutnDao.createAccount(account)) {
-
             return new ResponseEntity<>(ResponseStatus.builder().message("Created Unsucssesful").build(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(ResponseStatus.builder().message("Created Succesful").account(account).build(), HttpStatus.CREATED);
-
     }
 
     @GetMapping("/auth/{email}/{password}")

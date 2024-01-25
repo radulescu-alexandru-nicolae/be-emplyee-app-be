@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
-@Entity(name="identities")
+@Entity(name = "identities")
 @Table(name = "identities")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,19 +16,23 @@ public class Identity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false, unique = true)
     private String email;
+
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(length = 100000)
     private byte[] image;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
+
     // Constructor
-    public Identity(String email, byte[] image,Account account) {
+    public Identity(String email, byte[] image, Account account) {
         this.email = email;
         this.image = Arrays.copyOf(image, image.length);
-        this.account=account;
+        this.account = account;
     }
-
 }
+

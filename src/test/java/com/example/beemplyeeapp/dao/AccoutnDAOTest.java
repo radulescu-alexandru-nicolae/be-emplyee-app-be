@@ -26,10 +26,11 @@ class AccoutnDAOTest {
     @Test
     void testCreateAccount() {
         // Mocking the EntityManager and Query
+        long number=1L;
         Query query = Mockito.mock(Query.class);
         Mockito.when(entityManager.createNativeQuery(anyString())).thenReturn(query);
         Mockito.when(query.setParameter(anyInt(), any())).thenReturn(query);
-        Mockito.when(query.getSingleResult()).thenReturn(1.0f);
+        Mockito.when(query.getSingleResult()).thenReturn(number);
 
         // Creating a sample Account
         Account account = new Account();
@@ -71,12 +72,13 @@ class AccoutnDAOTest {
 
     @Test
     void testLogin() {
+        long number=1L;
+
         // Mocking the EntityManager and Query
         Query query = Mockito.mock(Query.class);
         Mockito.when(entityManager.createNativeQuery(anyString())).thenReturn(query);
         Mockito.when(query.setParameter(anyInt(), any())).thenReturn(query);
-        Mockito.when(query.getSingleResult()).thenReturn(1.0f);
-
+        Mockito.when(query.getSingleResult()).thenReturn(number);
         // Testing the login method
         boolean result = accoutnDAO.login("test@example.com", "password");
 
