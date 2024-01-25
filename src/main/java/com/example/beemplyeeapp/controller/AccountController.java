@@ -24,8 +24,6 @@ public class AccountController {
     @PostMapping
     @Transactional
     public ResponseEntity<ResponseStatus> addAccount(@RequestBody Account account) {
-        System.out.println("Account from requestBody" +account);
-        System.out.println("password "+account.getPassword());
         if (!iAccoutnDao.createAccount(account)) {
             return new ResponseEntity<>(ResponseStatus.builder().message("Created Unsucssesful").build(), HttpStatus.BAD_REQUEST);
         }

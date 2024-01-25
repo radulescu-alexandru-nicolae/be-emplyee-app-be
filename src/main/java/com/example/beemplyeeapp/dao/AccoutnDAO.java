@@ -49,14 +49,12 @@ public class AccoutnDAO implements IAccoutnDao {
             return false;
         }
 
-        System.out.println("Encrypted password in accountDAO: " + encryptedPassword);
 
         String sqlQuery = "SELECT CASE WHEN EXISTS (SELECT 1 FROM accounts a WHERE a.email = ?1 and a.password = ?2) THEN 1 ELSE 0 END";
         Query query = entityManager.createNativeQuery(sqlQuery);
         query.setParameter(1, email);
         query.setParameter(2, encryptedPassword);
 
-        System.out.println("111111 " + encryptedPassword + " " + password);
 
         long result = (long) query.getSingleResult();
         return result == 1;
@@ -66,7 +64,6 @@ public class AccoutnDAO implements IAccoutnDao {
     @Transactional
     public void removeAccount(int id) {
         Account account = entityManager.find(Account.class, id);
-        System.out.println("AAAAAAAAAA" +account);
         if (account != null) {
 
             entityManager.remove(account);
